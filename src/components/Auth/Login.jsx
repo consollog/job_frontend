@@ -18,7 +18,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "https://job-app-backend-amhz.onrender.com/api/v1/user/login",
+        "https://job-app-backend-cbmx.onrender.com/api/v1/user/login",
         { email, password, role },
         {
           headers: {
