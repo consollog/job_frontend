@@ -18,24 +18,32 @@ import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 
 const App = () => {
-  const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
+  const { isAuthorized, setIsAuthorized, setUser, user } = useContext(Context);
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          "https://job-app-backend-1.onrender.com/api/v1/user/getuser",
-          {
-            withCredentials: true,
-          }
-        );
-        setUser(response.data.user);
-        setIsAuthorized(true);
+        const token = localStorage.getItem("token"); // Assuming token is stored in localStorage
+        if (token) {
+          // Token found, attempt to fetch user data
+          const response = await axios.get(
+            "https://job-app-backend-1.onrender.com/api/v1/user/getuser",
+            {
+              withCredentials: true,
+            }
+          );
+          setUser(response.data.user);
+          setIsAuthorized(true);
+        } else {
+          // No token found, set auth to false
+          setIsAuthorized(false);
+        }
       } catch (error) {
+        console.error("Error fetching user:", error);
         setIsAuthorized(false);
       }
     };
     fetchUser();
-  }, [user]);
+  }, []);
 
   return (
     <>
