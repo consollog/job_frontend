@@ -13,7 +13,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.get(
-        "https://job-app-backend-iwja.onrender.com/api/v1/user/logout",
+        "https://job-app-backend-1.onrender.com/api/v1/user/logout",
         {
           withCredentials: true,
         }
