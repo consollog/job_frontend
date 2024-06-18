@@ -12,7 +12,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
-  const { isAuthorized, setIsAuthorized } = useContext(Context);
+  const { isAuthorized, setIsAuthorized, setuser } = useContext(Context);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -32,6 +32,7 @@ const Login = () => {
       setPassword("");
       setRole("");
       setIsAuthorized(true);
+      setuser(data.user)
     } catch (error) {
       toast.error(error.response.data.message);
     }
